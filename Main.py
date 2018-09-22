@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox
 import time, os
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from Database import RR_DB
 from Menu import Menu
-import locale
+import locale, random
 import logging, logging.handlers
 
 VERSION = 'V1.0'
@@ -14,13 +14,21 @@ LOG_HANDLE = 'RR'
 
 class RegisterRunner:
 
+
+
     def __init__(self, root=None, log=None):
 
         self.log = log
+        self.LIST_LBX_FORMAT = '{0:<6}{1:<69}{2:<10}{3:<15}'
+        self.LIST_LBX_HEIGHT = 20
+        self.running_state = False
 
         #initialize database
         self.database = RR_DB(LOG_HANDLE)
-        #{self.database.test_populate_database()
+
+        self.student_id_list = self.database.get_students_id()
+        self.student_id_list_length = len(self.student_id_list)
+        random.seed()
 
         #initialize register
         #self.register = Register(root, self.database, LOG_HANDLE)
@@ -33,49 +41,76 @@ class RegisterRunner:
         self.init_menu()
         self.init_widgets()
 
+        self.actions_on_state()
+
         #set the minimum size of the window
         root.update()
         root.minsize(root.winfo_width(), root.winfo_height())
 
     def badge_scanned(self, event):
-        pass
-        # guest = self.database.find_guest_from_badge(self.badge_ent.get())
-        # if guest.found :
-        #     direction = self.register.new_registration(guest)
-        #     till_string = ''
-        #     if direction == 'IN':
-        #         if guest.subscription_type == Guest.SUB_TYPE_SUBSCRIPTION:
-        #             delta = FGR_DB.add_years(guest.subscribed_from, 1) - date.today()
-        #             if delta.days < 0:
-        #                 messagebox.showwarning('Abonnement is verlopen',
-        #                                        'Opgelet, uw abonnement is verlopen.\nVraag info aan een medewerker')
-        #             else:
-        #                 till_string = ', abonnement is nog {} dagen geldig'.format(delta.days)
-        #         else:
-        #             guest.pay_as_you_go_left -= 1
-        #             if guest.pay_as_you_go_left < 0:
-        #                 messagebox.showwarning('Beurtenkaart is verlopen',
-        #                                        'Opgelet, uw beurtenkaart is verlopen.\nVraag info aan een medewerker')
-        #             else:
-        #                 till_string = ', er zijn nog {} geldige beurten'.format(guest.pay_as_you_go_left)
-        #             rslt = self.database.update_guest(guest.id, guest.badge_code,
-        #                                               guest.badge_number, guest.first_name,
-        #                                               guest.last_name,
-        #                                               guest.email, guest.phone,
-        #                                               guest.subscription_type,
-        #                                               guest.subscribed_from,
-        #                                               guest.pay_as_you_go_left, guest.pay_as_you_go_max)
-        #     self.show_message("Hallo {}, u heb juist {} gebadged{}".format(guest.first_name, direction, till_string), 4000, 'green')
-        # else:
-        #     self.show_message("U bent nog niet geregistreerd, gelieve hulp te vragen", 5000, "red")
-        # self.badge_ent.delete(0, tk.END)
+        #test mode : if 0 is entered, pick a random student from the database
+        if self.badge_ent.get() == '0':
+            student = self.database.find_student_from_id(random.choice(self.student_id_list))
+        else:
+            try:
+                nbr = int(self.badge_ent.get())
+                # 100.000 : arbitrary large number.  If the scanned number is smaller, it is considered a studentnumber
+                # else a badgecode (rfid)
+                if nbr < 100000:
+                    student = self.database.find_student_from_number(nbr)
+                else:
+                    student = self.database.find_student_from_badge(self.badge_ent.get())
+            except:
+                student = self.database.find_student_from_badge(self.badge_ent.get())
+        self.badge_ent.delete(0, tk.END)
+        if student.found:
+            d = datetime.now() - self.starttime
+            time_ran = d.seconds * 1000 + int(d.microseconds/1000)
+            t_min = int(d.seconds/60)
+            t_sec = d.seconds - t_min * 60
+            t_ms = int(d.microseconds/1000)
+            time_str = '{:02d}:{:02d}:{:03d}'.format(t_min, t_sec, t_ms)
+            self.database.update_student(student.id, time_ran, self.starttime)
+            self.log.info("{} {} {} {}".format(self.list_lbx_idx+1, student.first_name, student.last_name, student.classgroup))
+            l = self.LIST_LBX_FORMAT.format(self.list_lbx_idx+1, student.last_name + ' ' + student.first_name, student.classgroup, time_str)
+            self.list_lbx.insert('end', l)
+            if self.list_lbx_idx % 2 == 0:
+                self.list_lbx.itemconfig(self.list_lbx_idx, bg='lightgrey')
+            if self.list_lbx_idx >= self.LIST_LBX_HEIGHT:
+                self.list_lbx.yview_scroll(1, "units")
+            self.list_lbx_idx += 1
+        else:
+            self.log.error('code {} not found'.format(self.badge_ent.get()))
 
     def update_time(self):
-        self.time_lbl.configure(text=time.strftime('%d/%m/%Y %H:%M:%S'))
+        #self.time_lbl.configure(text=time.strftime('%M:%S'))
+        if self.running_state:
+            #print("> " + str(datetime.now()))
+            d = datetime.now() - self.starttime
+            m = int(d.seconds/60)
+            s = d.seconds - 60 * m
+            self.time_lbl.configure(text='{:02d}:{:02d}'.format(m, s))
         root.after(1000, self.update_time)
 
     def clear_database(self):
         answer = tk.Message
+
+    #state == true : clock is running
+    def actions_on_state(self):
+        if self.running_state:
+            self.list_lbx_idx = 0
+            self.starttime = datetime.now()
+            #print("S " + str(self.starttime))
+            self.start_stop_btn.config(bg='red', text='Stop')
+            self.time_lbl.configure(text='00:00')
+            self.list_lbx.delete(0, 'end')
+            self.update_time()
+        else:
+            self.start_stop_btn.config(bg='green', text='Start')
+
+    def start_stop(self):
+        self.running_state = not self.running_state
+        self.actions_on_state()
 
     def init_menu(self):
         #menu
@@ -84,45 +119,35 @@ class RegisterRunner:
         self.main_mnu.add_cascade(label="Menu", menu=self.menu_mnu)
         self.menu_mnu.add_command(label="Import", command=self.menu.import_students)
         self.menu_mnu.add_command(label="Export", command=self.menu.export_results)
-        #self.menu_mnu.add_command(label="Wis", command=self.clear_database)
         self.root.configure(menu=self.main_mnu)
 
-    def child_window_closes(self):
-        pass
-        #self.change_mode(self.Mode.guest)
-
-
     def init_widgets(self):
-        self.fr1_frm = tk.Frame(self.root_frm)
-        self.fr1_frm.grid(row=0, column=0, sticky='W')
+        #Row 0
+        self.start_stop_btn = tk.Button(self.root, text="Start", font=("Times New Roman", 40), bd=10, \
+                                        activebackground='red', activeforeground='green', command=self.start_stop)
+        self.start_stop_btn.grid(row=0, column=0, sticky='w')
 
-        #tk.Label(self.root_frm, text = "Welkom bij het fablab\nGelieve uw badge aan te bieden", font=("Times New Roman", 60)).grid(row=1, columnspan=3)
+        #Row 0 and 1
+        self.time_lbl = tk.Label(self.root, text='00:00', font=("Times New Roman", 120))
+        self.time_lbl.grid(row=0, column=1, rowspan=2)
+        #self.update_time()
 
-        self.time_lbl = tk.Label(self.root_frm, text=time.strftime('%d/%m/%Y %H:%M:%S'), font=("Times New Roman", 60))
-        self.time_lbl.grid(row=2, columnspan=3)
-        self.update_time()
-
-        tk.Label(self.root_frm, text = "", font=("Times New Roman", 30)).grid(columnspan=3, sticky='E')
-
-        self.fr2_frm = tk.Frame(self.root_frm)
-        self.fr2_frm.grid(columnspan=3, sticky='W')
-        tk.Label(self.fr2_frm, text = "BADGE", font=("Times New Roman", 30)).pack(side='left')
-        self.badge_ent = tk.Entry(self.fr2_frm, show='*', font=("Times New Roman", 30))
-        self.badge_ent.pack(side='left')
+        #Row 1
+        self.badge_ent = tk.Entry(self.root, font=("Times New Roman", 20))
+        self.badge_ent.grid(row=1, column=0, sticky='w')
         self.badge_ent.bind('<Return>', self.badge_scanned)
 
-        self.guest_welcome_lbl = tk.Label(self.root_frm, text ="", font=("Times New Roman", 20))
-        self.guest_welcome_lbl.grid(columnspan=3, sticky='W')
-
-        tk.Label(self.root_frm, text = "", font=("Times New Roman", 30)).grid(columnspan=3, sticky='E')
-
-
-    def show_message(self, msg, time=2000, color='black'):
-        def clear_msg():
-            self.guest_welcome_lbl.config(text = '')
-        #self.root_frm.focus()
-        self.guest_welcome_lbl.config(text=msg, fg=color)
-        self.root_frm.after(time, clear_msg)
+        #Row 2
+        tk.Label(self.root, text=self.LIST_LBX_FORMAT.format('Plts', 'Naam', 'Klas', 'Tijd'), font=('Courier', 15)). \
+                grid(row=2, column=0, columnspan=2)
+        #ROW 3
+        self.list_lbx = tk.Listbox(self.root, height=self.LIST_LBX_HEIGHT, width=100, font=('Courier', 15))
+        self.list_lbx.grid(row=3, column=0, rowspan=self.LIST_LBX_HEIGHT, columnspan=2)
+        sb1_sb = tk.Scrollbar(self.root)
+        sb1_sb.grid(row=3, column=3, rowspan=self.LIST_LBX_HEIGHT)
+        self.list_lbx.config(yscrollcommand=sb1_sb.set)
+        sb1_sb.config(command=self.list_lbx.yview)
+        self.badge_ent.focus_force()
 
 
 if __name__ == "__main__":

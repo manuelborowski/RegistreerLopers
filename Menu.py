@@ -23,7 +23,7 @@ class Menu:
                 csv_reader = csv.DictReader(csv_file , delimiter=';')
                 student_list = []
                 for l in csv_reader:
-                    print(l['NAAM'], l['RFID'])
+                    #print(l['NAAM'], l['RFID'])
                     student_list.append((l['NAAM'], l['VOORNAAM'], l['KLAS'], l['LEERLINGNUMMER'], l['RFID']))
                     nbr_students += 1
 

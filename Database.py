@@ -5,6 +5,21 @@ import logging
 from shutil import copyfile
 
 
+class Student:
+    def __init__(self, db_row=None):
+        if db_row is None:
+            self.found = False
+        else:
+            self.found = True
+            self.id = db_row['id']
+            self.first_name = db_row['first_name']
+            self.last_name = db_row['last_name']
+            self.classgroup = db_row['classgroup']
+            self.badgecode = db_row['badgecode']
+            self.studentnumber = db_row['studentnumber']
+            self.time_ran = db_row['time_ran']
+            self.starttime = db_row['starttime']
+
 class RR_DB :
     def __init__(self, log_handle):
         self.cnx = sqlite3.connect(self.DB_DEST, detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
@@ -29,24 +44,22 @@ class RR_DB :
     TABLES['students'] = (
         "CREATE TABLE IF NOT EXISTS students ("
         "  id INTEGER PRIMARY KEY UNIQUE NOT NULL,"
-        "  badge_code TEXT UNIQUE NOT NULL,"
-        "  student_number INTEGER, "
+        "  badgecode TEXT UNIQUE NOT NULL,"
+        "  studentnumber INTEGER, "
         "  first_name TEXT,"
         "  last_name TEXT,"
         "  classgroup TEXT,"
-        "  time INTEGER "
+        "  time_ran INTEGER,"
+        "  starttime timestamp "
         ")")
 
     ADD_STUDENT = ("INSERT INTO students "
-                 "(last_name, first_name, classgroup, student_number, badge_code)"
+                 "(last_name, first_name, classgroup, studentnumber, badgecode)"
                  "VALUES (?, ?, ?, ?, ?)")
 
     UPDATE_GUEST = ("UPDATE students SET "
-                    "badge_code=?,"
-                    "student_number=?,"
-                    "first_name=?,"
-                    "last_name=?,"
-                    "time=?"
+                    "time_ran=?,"
+                    "starttime=?,"
                     "WHERE id=?;")
 
     #student_list.append((l['NAAM'], l['VOORNAAM'], l['KLAS'], l['LEERLINGNUMMER'], l['RFID']))
@@ -71,166 +84,38 @@ class RR_DB :
     #     r = self.csr.fetchone()
     #     return Guest(r)
     #
-    # def find_guest_from_badge(self, badge_code):
-    #     self.csr.execute('SELECT * FROM guests WHERE badge_code=?', (badge_code,))
-    #     r = self.csr.fetchone()
-    #     return Guest(r)
-    #
-    # def get_guests(self):
-    #     self.csr.execute('SELECT * FROM guests ORDER BY last_name, first_name')
-    #     r = self.csr.fetchall()
-    #     l = []
-    #     for i in r:
-    #         l.append(Guest(i))
-    #     return l
-    #
-    # def find_guests_from_keywords(self, guest):
-    #     qs = 'SELECT * FROM guests WHERE '
-    #     added = False
-    #     if guest.first_name:
-    #         qs += 'first_name LIKE \'%{}%\''.format(guest.first_name)
-    #         added = True
-    #     if guest.last_name:
-    #         if added:
-    #             qs += ' AND '
-    #         qs += 'last_name LIKE \'%{}%\''.format(guest.last_name)
-    #         added = True
-    #
-    #     if guest.email:
-    #         if added:
-    #             qs += ' AND '
-    #         qs += 'email LIKE \'%{}%\''.format(guest.email)
-    #         added = True
-    #
-    #     if guest.phone:
-    #         if added:
-    #             qs += ' AND '
-    #         qs += 'phone LIKE \'%{}%\''.format(guest.phone)
-    #         added = True
-    #
-    #     if guest.badge_code:
-    #         if added:
-    #             qs += ' AND '
-    #         qs += 'badge_code LIKE \'%{}%\''.format(guest.badge_code)
-    #         added = True
-    #
-    #     if guest.badge_number:
-    #         if added:
-    #             qs += ' AND '
-    #         qs += 'badge_number LIKE \'%{}%\''.format(guest.badge_number)
-    #         added = True
-    #
-    #     self.log.info(qs)
-    #     self.csr.execute(qs)
-    #     l = []
-    #     r = self.csr.fetchall()
-    #     for i in r:
-    #         l.append(Guest(i))
-    #     return l
-    #
-    #
-    # def add_guest(self, badge_code, badge_number, first_name, last_name, email, phone, sub_type, subed_from, payg_left, payg_max):
-    #     rslt = True
-    #     try:
-    #         self.csr.execute(self.ADD_GUEST, (badge_code, badge_number, first_name, last_name, email, phone, sub_type, subed_from, payg_left, payg_max))
-    #     except sqlite3.Error as e:
-    #         rslt = False
-    #     self.cnx.commit()
-    #     self.log.info("Guest added : {}, {}, {}, {}, {}, {}".format(first_name, last_name, email, phone, badge_number, sub_type))
-    #     return rslt
-    #
-    #
-    # def delete_guest(self, id):
-    #     rslt = True
-    #     try:
-    #         self.csr.execute('DELETE FROM guests WHERE id=?',(id, ))
-    #     except sqlite3.Error as e:
-    #         rslt = False
-    #     self.cnx.commit()
-    #     return rslt
-    #
-    #
-    # def update_guest(self, id, badge_code, badge_number, first_name, last_name, email, phone, sub_type, subed_from, payg_left, payg_max):
-    #     rslt = True
-    #     try:
-    #         self.csr.execute(self.UPDATE_GUEST, (badge_code, badge_number, first_name, last_name, email, phone, sub_type, subed_from, payg_left, payg_max, id))
-    #     except:
-    #         rslt = False
-    #     self.cnx.commit()
-    #     return rslt
-    #
-    # def check_registration_time_format(self, time_string):
-    #     try:
-    #         dt = datetime.datetime.strptime(time_string, '%Y-%m-%d %H:%M:%S')
-    #         return True
-    #     except Exception as e:
-    #         return False
-    #
-    # def add_registration(self, guest_id, time_in, time_out=None):
-    #     rslt = True
-    #     try:
-    #         # time_in.replace(microsecond=0)
-    #         # if time_out:
-    #         #     time_out.replace(microsecond=0)
-    #         self.csr.execute(self.ADD_REGISTRATION, (time_in, time_out, guest_id))
-    #     except Exception as e:
-    #         rslt = False
-    #     self.cnx.commit()
-    #     self.log.info("Registration added : {}, {}".format(guest_id, time_in))
-    #     return rslt
-    #
-    # def update_registration(self, id, guest_id, time_in, time_out):
-    #     rslt = True
-    #     try:
-    #         self.csr.execute(self.UPDATE_REGISTRATION, (time_in, time_out, guest_id, id))
-    #     except:
-    #         rslt = False
-    #     self.cnx.commit()
-    #     return rslt
-    #
-    # def find_last_registration_from_guest(self, guest_id):
-    #     l = self.find_registrations_from_guest(guest_id)
-    #     if l:
-    #         r = l[0] #newest registration
-    #     else:
-    #         r = Registration()
-    #     return r
-    #
-    #
-    # def find_registrations_from_guest(self, guest_id):
-    #     self.csr.execute('select * FROM registrations WHERE guest_id=? ORDER BY time_in DESC', (guest_id,))
-    #     db_lst = self.csr.fetchall()
-    #     lst = []
-    #     for i in db_lst:
-    #         lst.append(Registration(i))
-    #     return lst
-    #
-    #
-    # def find_registration(self, id):
-    #     self.csr.execute('SELECT * FROM registrations WHERE id=?', (id,))
-    #     r = self.csr.fetchone()
-    #     return  Registration(r)
-    #
-    #
-    # def get_registrations_and_guests(self, return_db_rows=False):
-    #     raw_select = self.csr.execute('SELECT * FROM registrations JOIN guests ON registrations.guest_id = guests.id ORDER BY time_in DESC')
-    #     if return_db_rows: return raw_select
-    #     db_lst = self.csr.fetchall()
-    #     lst = []
-    #     for i in db_lst:
-    #         lst.append(Registration(i))
-    #     return lst
-    #
-    #
-    # def delete_registration(self, id):
-    #     rslt = True
-    #     try:
-    #         self.csr.execute('DELETE FROM registrations WHERE id=?',(id, ))
-    #     except sqlite3.Error as e:
-    #         rslt = False
-    #     self.cnx.commit()
-    #     return rslt
+    def find_student_from_badge(self, badgecode):
+        badgecode = badgecode.upper()
+        self.csr.execute('SELECT * FROM students WHERE badgecode=?', (badgecode,))
+        r = self.csr.fetchone()
+        return Student(r)
 
+    def find_student_from_number(self, studentnumber):
+        self.csr.execute('SELECT * FROM students WHERE studentnumber=?', (studentnumber,))
+        r = self.csr.fetchone()
+        return Student(r)
+
+    def find_student_from_id(self, id):
+        self.csr.execute('SELECT * FROM students WHERE id=?', (id,))
+        r = self.csr.fetchone()
+        return Student(r)
+
+    #return a list of student ids
+    def get_students_id(self):
+        self.csr.execute('SELECT * FROM students')
+        rows = self.csr.fetchall()
+        students_id = []
+        for r in rows:
+            students_id.append(r['id'])
+        return students_id
+
+    def update_student(self, id, time_ran, starttime):
+        try:
+            self.csr.execute('UPDATE students SET time_ran=?, starttime=? WHERE id=?;', (time_ran, starttime, id))
+            self.cnx.commit()
+            self.log.info('Update student {} {} {}'.format(id, time_ran, starttime))
+        except sqlite3.Error as e:
+            self.log.error('Could not update student {} {} {}'.format(id, time_ran, starttime))
 
     def close(self):
         self.cnx.close()
