@@ -1,0 +1,59 @@
+2018-09-19 20:32:41,710 - RR - INFO - start FGR
+2018-09-19 20:33:49,748 - RR - INFO - start FGR
+2018-09-20 19:32:25,316 - RR - INFO - start FGR
+2018-09-20 19:47:10,589 - RR - INFO - start FGR
+2018-09-20 19:52:57,676 - RR - INFO - start FGR
+2018-09-20 19:53:55,468 - RR - INFO - start FGR
+2018-09-20 20:05:07,317 - RR - INFO - start FGR
+2018-09-20 20:15:47,380 - RR - INFO - start FGR
+2018-09-20 20:17:34,178 - RR - INFO - start FGR
+2018-09-20 20:18:20,683 - RR - INFO - start FGR
+2018-09-20 20:20:01,511 - RR - INFO - start FGR
+2018-09-20 20:20:20,709 - RR - INFO - start FGR
+2018-09-20 20:36:36,486 - RR - INFO - start FGR
+2018-09-21 18:28:19,162 - RR - INFO - start FGR
+2018-09-21 18:29:49,245 - RR - INFO - start FGR
+2018-09-21 18:29:49,252 - RR.Database - INFO - Creating table students: 
+2018-09-21 19:41:48,198 - RR - INFO - start FGR
+2018-09-21 19:41:48,200 - RR.Database - INFO - Creating table students: 
+2018-09-21 19:42:01,546 - RR.Register - INFO - Import CSV, loaded 18 students
+2018-09-21 19:42:01,546 - RR.Database - INFO - Added students to database
+2018-09-21 19:49:12,777 - RR - INFO - start FGR
+2018-09-21 19:49:12,779 - RR.Database - INFO - Creating table students: 
+2018-09-21 19:49:19,108 - RR.Register - INFO - Import CSV, loaded 18 students
+2018-09-21 19:49:19,118 - RR.Database - INFO - Added students to database
+2018-09-21 19:50:18,916 - RR - INFO - start FGR
+2018-09-21 19:50:18,918 - RR.Database - INFO - Creating table students: 
+2018-09-21 19:52:03,081 - RR - INFO - start FGR
+2018-09-21 19:52:03,083 - RR.Database - INFO - Creating table students: 
+2018-09-21 19:56:06,604 - RR - INFO - start FGR
+2018-09-21 19:56:06,606 - RR.Database - INFO - Creating table students: 
+2018-09-21 19:58:08,428 - RR - INFO - start FGR
+2018-09-21 19:58:08,452 - RR.Database - INFO - Creating table students: 
+2018-09-21 19:58:24,398 - RR.Register - INFO - Import CSV, loaded 18 students
+2018-09-21 19:58:24,416 - RR.Database - INFO - Added students to database
+2018-09-21 19:59:54,800 - RR - INFO - start FGR
+2018-09-21 19:59:54,801 - RR.Database - INFO - Creating table students: 
+2018-09-21 20:00:00,907 - RR.Register - INFO - Import CSV, loaded 18 students
+2018-09-21 20:04:10,878 - RR - INFO - start FGR
+2018-09-21 20:04:10,880 - RR.Database - INFO - Creating table students: 
+2018-09-21 20:04:15,454 - RR.Register - INFO - Import CSV, loaded 18 students
+2018-09-21 20:04:15,455 - RR.Database - ERROR - Could not add to database : Amer Amélie from 3A
+2018-09-21 20:04:15,456 - RR.Database - ERROR - Could not add to database : Cabes Jade from 3A
+2018-09-21 20:04:15,456 - RR.Database - ERROR - Could not add to database : Cisse Mame-Diarra from 3A
+2018-09-21 20:04:15,456 - RR.Database - ERROR - Could not add to database : Daems Lieke from 3A
+2018-09-21 20:04:15,456 - RR.Database - ERROR - Could not add to database : De Swert Kaat from 3A
+2018-09-21 20:04:15,456 - RR.Database - ERROR - Could not add to database : Dzhaykhanova Khava from 3A
+2018-09-21 20:04:15,457 - RR.Database - ERROR - Could not add to database : Felix Robbe from 3A
+2018-09-21 20:04:15,457 - RR.Database - ERROR - Could not add to database : Geerts Kobe from 3A
+2018-09-21 20:04:15,457 - RR.Database - ERROR - Could not add to database : Geylen Elena from 3A
+2018-09-21 20:04:15,457 - RR.Database - ERROR - Could not add to database : Janssens Lena from 3A
+2018-09-21 20:04:15,457 - RR.Database - ERROR - Could not add to database : Krastev Boris from 3A
+2018-09-21 20:04:15,458 - RR.Database - ERROR - Could not add to database : Mayemba Estina from 3A
+2018-09-21 20:04:15,458 - RR.Database - ERROR - Could not add to database : Nelen Jonas from 3A
+2018-09-21 20:04:15,458 - RR.Database - ERROR - Could not add to database : Nies Ruth from 3A
+2018-09-21 20:04:15,458 - RR.Database - ERROR - Could not add to database : Nys Senne from 3A
+2018-09-21 20:04:15,458 - RR.Database - ERROR - Could not add to database : Oorts Sten from 3A
+2018-09-21 20:04:15,459 - RR.Database - ERROR - Could not add to database : Peeters Amelie from 3A
+2018-09-21 20:04:15,459 - RR.Database - ERROR - Could not add to database : Pinxteren Jutta from 3A
+2018-09-21 20:04:15,459 - RR.Database - INFO - Added students to database
