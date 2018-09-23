@@ -19,6 +19,8 @@ class RegisterRunner:
         self.LIST_LBX_FORMAT = '{0:<6}{1:<69}{2:<10}{3:<15}'
         self.LIST_LBX_HEIGHT = 20
         self.running_state = False
+        self.switch_a_q = False
+        self.actions_on_q_a_state()
 
         #initialize database
         self.database = RR_DB(LOG_HANDLE)
@@ -26,8 +28,6 @@ class RegisterRunner:
         self.get_students_id()
         random.seed()
 
-        #initialize register
-        #self.register = Register(root, self.database, LOG_HANDLE)
         self.menu = Menu(self, root, self.database, LOG_HANDLE)
 
         #initialize GUI
@@ -37,46 +37,65 @@ class RegisterRunner:
         self.init_menu()
         self.init_widgets()
 
-        self.actions_on_state()
+        self.actions_on_running_state()
 
         #set the minimum size of the window
+        root.winfo_toplevel().title("Lopers Tijd Registratie {}".format(VERSION))
         root.update()
         root.minsize(root.winfo_width(), root.winfo_height())
 
     def badge_scanned(self, event):
-        #test mode : if 0 is entered, pick a random student from the database
-        if self.badge_ent.get() == '0':
-            student = self.database.find_student_from_id(random.choice(self.student_id_list))
-        else:
-            try:
-                nbr = int(self.badge_ent.get())
-                # 100.000 : arbitrary large number.  If the scanned number is smaller, it is considered a studentnumber
-                # else a badgecode (rfid)
-                if nbr < 100000:
-                    student = self.database.find_student_from_number(nbr)
-                else:
-                    student = self.database.find_student_from_badge(self.badge_ent.get())
-            except:
-                student = self.database.find_student_from_badge(self.badge_ent.get())
+        if self.running_state:
+            #test mode : if 0 is entered, pick a random student from the database
+            badgecode = self.badge_ent.get().upper()
+            if badgecode == '0':
+                student = self.database.find_student_from_id(random.choice(self.student_id_list))
+            else:
+                try:
+                    nbr = int(badgecode)
+                    # 100.000 : arbitrary large number.  If the scanned number is smaller, it is considered a studentnumber
+                    # else a badgecode (rfid)
+                    if nbr < 100000:
+                        student = self.database.find_student_from_number(nbr)
+                    else:
+                        student = self.database.find_student_from_badge(badgecode)
+                except:
+                    #an RFID code is scanned, with potentianaly a Q or A in it.  Check if Q and A needs to be switched
+                    if self.switch_a_q:
+                        badgecode = badgecode.replace('Q', '!')
+                        badgecode = badgecode.replace('A', 'Q')
+                        badgecode = badgecode.replace('!', 'A')
+                    student = self.database.find_student_from_badge(badgecode)
+            if student.found:
+                d = datetime.now() - self.starttime
+                time_ran = d.seconds * 1000 + int(d.microseconds/1000)
+                t_min = int(d.seconds/60)
+                t_sec = d.seconds - t_min * 60
+                t_ms = int(d.microseconds/1000)
+                time_str = '{:02d}:{:02d},{:03d}'.format(t_min, t_sec, t_ms)
+                self.database.update_student(student.id, time_ran, self.starttime)
+                self.log.info("{} {} {} {}".format(self.list_lbx_idx+1, student.first_name, student.last_name, student.classgroup))
+                l = self.LIST_LBX_FORMAT.format(self.list_lbx_idx+1, student.last_name + ' ' + student.first_name, student.classgroup, time_str)
+                self.list_lbx.insert('end', l)
+                if self.list_lbx_idx % 2 == 0:
+                    self.list_lbx.itemconfig(self.list_lbx_idx, bg='lightgrey')
+                if self.list_lbx_idx >= self.LIST_LBX_HEIGHT:
+                    self.list_lbx.yview_scroll(1, "units")
+                self.list_lbx_idx += 1
+            else:
+                self.log.error('code {} not found'.format(self.badge_ent.get()))
         self.badge_ent.delete(0, tk.END)
-        if student.found:
-            d = datetime.now() - self.starttime
-            time_ran = d.seconds * 1000 + int(d.microseconds/1000)
-            t_min = int(d.seconds/60)
-            t_sec = d.seconds - t_min * 60
-            t_ms = int(d.microseconds/1000)
-            time_str = '{:02d}:{:02d}:{:03d}'.format(t_min, t_sec, t_ms)
-            self.database.update_student(student.id, time_ran, self.starttime)
-            self.log.info("{} {} {} {}".format(self.list_lbx_idx+1, student.first_name, student.last_name, student.classgroup))
-            l = self.LIST_LBX_FORMAT.format(self.list_lbx_idx+1, student.last_name + ' ' + student.first_name, student.classgroup, time_str)
-            self.list_lbx.insert('end', l)
-            if self.list_lbx_idx % 2 == 0:
-                self.list_lbx.itemconfig(self.list_lbx_idx, bg='lightgrey')
-            if self.list_lbx_idx >= self.LIST_LBX_HEIGHT:
-                self.list_lbx.yview_scroll(1, "units")
-            self.list_lbx_idx += 1
+
+    def actions_on_q_a_state(self):
+        if self.switch_a_q:
+            self.switch_menu_label = 'WEL A en Q wisselen'
         else:
-            self.log.error('code {} not found'.format(self.badge_ent.get()))
+            self.switch_menu_label = 'NIET A en Q wisselen'
+
+    def switch_a_q_state(self):
+        self.switch_a_q = not self.switch_a_q
+        self.actions_on_q_a_state()
+
 
     def update_time(self):
         #self.time_lbl.configure(text=time.strftime('%M:%S'))
@@ -97,9 +116,9 @@ class RegisterRunner:
         self.student_id_list = self.database.get_students_id()
 
     #state == true : clock is running
-    def actions_on_state(self):
+    def actions_on_running_state(self):
+        self.starttime = datetime.now()
         if self.running_state:
-            self.starttime = datetime.now()
             #print("S " + str(self.starttime))
             self.start_stop_btn.config(bg='red', text='Stop')
             self.clear_display()
@@ -109,11 +128,14 @@ class RegisterRunner:
 
     def start_stop(self):
         self.running_state = not self.running_state
-        self.actions_on_state()
+        self.actions_on_running_state()
+
+    def update_menu(self):
+        self.menu_mnu.entryconfig(7, label=self.switch_menu_label)
 
     def init_menu(self):
         #menu
-        self.main_mnu = tk.Menu()
+        self.main_mnu = tk.Menu(postcommand=self.update_menu)
         self.menu_mnu=tk.Menu()
         self.main_mnu.add_cascade(label="Menu", menu=self.menu_mnu)
         self.menu_mnu.add_command(label="Import", command=self.menu.import_students)
@@ -121,6 +143,8 @@ class RegisterRunner:
         self.menu_mnu.add_separator()
         self.menu_mnu.add_command(label="Wis tijden", command=self.menu.clear_timings)
         self.menu_mnu.add_command(label="Wis database", command=self.menu.clear_database)
+        self.menu_mnu.add_separator()
+        self.menu_mnu.add_command(label=self.switch_menu_label, command=self.switch_a_q_state)
 
         self.root.configure(menu=self.main_mnu)
 
@@ -156,7 +180,7 @@ class RegisterRunner:
 if __name__ == "__main__":
     locale.setlocale(locale.LC_ALL, '')
     root = tk.Tk()
-    root.iconbitmap(os.path.join(os.getcwd(), 'resources//fgr.ico'))
+    root.iconbitmap(os.path.join(os.getcwd(), 'resources//rr.ico'))
 
     # Set up a specific logger with our desired output level
     log = logging.getLogger(LOG_HANDLE)
@@ -167,8 +191,6 @@ if __name__ == "__main__":
     log_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     log_handler.setFormatter(log_formatter)
     log.addHandler(log_handler)
-
     log.info('start FGR')
-
     rr = RegisterRunner(root, log)
     root.mainloop()

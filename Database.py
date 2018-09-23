@@ -102,6 +102,11 @@ class RR_DB :
             students_id.append(r['id'])
         return students_id
 
+    #return all students
+    def get_students_sorted_on_time_ran(self):
+        self.csr.execute('SELECT * FROM students ORDER BY time_ran ASC, classgroup ASC, last_name ASC, first_name ASC')
+        return self.csr.fetchall()
+
     def update_student(self, id, time_ran, starttime):
         try:
             self.csr.execute('UPDATE students SET time_ran=?, starttime=? WHERE id=?;', (time_ran, starttime, id))
@@ -109,6 +114,13 @@ class RR_DB :
             self.log.info('Update student {} {} {}'.format(id, time_ran, starttime))
         except sqlite3.Error as e:
             self.log.error('Could not update student {} {} {}'.format(id, time_ran, starttime))
+
+    def clear_database(self):
+        try:
+            self.csr.execute('DELETE FROM students;')
+            self.cnx.commit()
+        except sqlite3.Error as e:
+            self.log.error('Could clear database : {}'.format(e))
 
     def close(self):
         self.cnx.close()
