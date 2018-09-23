@@ -89,6 +89,7 @@ class RegisterRunner:
         root.after(1000, self.update_time)
 
     def clear_display(self):
+        self.list_lbx_idx = 0
         self.time_lbl.configure(text='00:00')
         self.list_lbx.delete(0, 'end')
 
@@ -98,7 +99,6 @@ class RegisterRunner:
     #state == true : clock is running
     def actions_on_state(self):
         if self.running_state:
-            self.list_lbx_idx = 0
             self.starttime = datetime.now()
             #print("S " + str(self.starttime))
             self.start_stop_btn.config(bg='red', text='Stop')
