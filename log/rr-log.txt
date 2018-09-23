@@ -1,104 +1,116 @@
-2018-09-22 21:13:17,518 - RR.Database - INFO - Update student 5 4672 2018-09-22 21:13:12.836568
-2018-09-22 21:13:17,535 - RR - INFO - 7 Kaat De Swert 3A
-2018-09-22 21:13:17,966 - RR.Database - INFO - Update student 5 5120 2018-09-22 21:13:12.836568
-2018-09-22 21:13:17,966 - RR - INFO - 8 Kaat De Swert 3A
-2018-09-22 21:13:18,389 - RR.Database - INFO - Update student 9 5536 2018-09-22 21:13:12.836568
-2018-09-22 21:13:18,389 - RR - INFO - 9 Elena Geylen 3A
-2018-09-22 21:13:18,814 - RR.Database - INFO - Update student 11 5967 2018-09-22 21:13:12.836568
-2018-09-22 21:13:18,814 - RR - INFO - 10 Boris Krastev 3A
-2018-09-22 21:13:19,261 - RR.Database - INFO - Update student 7 6416 2018-09-22 21:13:12.836568
-2018-09-22 21:13:19,262 - RR - INFO - 11 Robbe Felix 3A
-2018-09-22 21:13:19,702 - RR.Database - INFO - Update student 8 6856 2018-09-22 21:13:12.836568
-2018-09-22 21:13:19,702 - RR - INFO - 12 Kobe Geerts 3A
-2018-09-22 21:13:20,142 - RR.Database - INFO - Update student 4 7296 2018-09-22 21:13:12.836568
-2018-09-22 21:13:20,143 - RR - INFO - 13 Lieke Daems 3A
-2018-09-22 21:13:20,578 - RR.Database - INFO - Update student 13 7728 2018-09-22 21:13:12.836568
-2018-09-22 21:13:20,578 - RR - INFO - 14 Jonas Nelen 3A
-2018-09-22 21:13:21,062 - RR.Database - INFO - Update student 2 8216 2018-09-22 21:13:12.836568
-2018-09-22 21:13:21,062 - RR - INFO - 15 Jade Cabes 3A
-2018-09-22 21:13:21,500 - RR.Database - INFO - Update student 12 8648 2018-09-22 21:13:12.836568
-2018-09-22 21:13:21,500 - RR - INFO - 16 Estina Mayemba 3A
-2018-09-22 21:13:21,919 - RR.Database - INFO - Update student 13 9072 2018-09-22 21:13:12.836568
-2018-09-22 21:13:21,919 - RR - INFO - 17 Jonas Nelen 3A
-2018-09-22 21:13:22,351 - RR.Database - INFO - Update student 14 9504 2018-09-22 21:13:12.836568
-2018-09-22 21:13:22,351 - RR - INFO - 18 Ruth Nies 3A
-2018-09-22 21:13:22,788 - RR.Database - INFO - Update student 16 9936 2018-09-22 21:13:12.836568
-2018-09-22 21:13:22,789 - RR - INFO - 19 Sten Oorts 3A
-2018-09-22 21:13:23,246 - RR.Database - INFO - Update student 18 10400 2018-09-22 21:13:12.836568
-2018-09-22 21:13:23,246 - RR - INFO - 20 Jutta Pinxteren 3A
-2018-09-22 21:13:23,934 - RR.Database - INFO - Update student 13 11089 2018-09-22 21:13:12.836568
-2018-09-22 21:13:23,934 - RR - INFO - 21 Jonas Nelen 3A
-2018-09-22 21:15:55,635 - RR - INFO - start FGR
-2018-09-22 21:15:55,636 - RR.Database - INFO - Creating table students: 
-2018-09-22 21:16:05,442 - RR.Database - ERROR - Could not update student 416 1176 2018-09-22 21:15:59.236749
-2018-09-22 21:16:05,443 - RR - INFO - 1 Mohammad Barakzai 3OITc
-2018-09-22 21:16:13,583 - RR.Database - ERROR - Could not update student 308 9320 2018-09-22 21:15:59.236749
-2018-09-22 21:16:13,584 - RR - INFO - 2 Joke Nicasi 6A
-2018-09-22 21:16:19,822 - RR.Database - ERROR - Could not update student 43 15559 2018-09-22 21:15:59.236749
-2018-09-22 21:16:19,823 - RR - INFO - 3 Hadija Maxmer 3B
-2018-09-22 21:16:32,587 - RR.Database - ERROR - Could not update student 351 28327 2018-09-22 21:15:59.236749
-2018-09-22 21:16:32,588 - RR - INFO - 4 Lennart Oorts 6C
-2018-09-22 21:16:54,500 - RR.Database - ERROR - Could not update student 351 50239 2018-09-22 21:15:59.236749
-2018-09-22 21:16:54,501 - RR - INFO - 5 Lennart Oorts 6C
-2018-09-22 21:17:02,679 - RR.Database - ERROR - Could not update student 351 58415 2018-09-22 21:15:59.236749
-2018-09-22 21:17:02,680 - RR - INFO - 6 Lennart Oorts 6C
-2018-09-22 21:17:09,838 - RR.Database - ERROR - Could not update student 348 65576 2018-09-22 21:15:59.236749
-2018-09-22 21:17:09,839 - RR - INFO - 7 Emilie Jacobs 6C
-2018-09-22 21:17:39,325 - RR.Database - ERROR - Could not update student 348 95064 2018-09-22 21:15:59.236749
-2018-09-22 21:17:39,326 - RR - INFO - 8 Emilie Jacobs 6C
-2018-09-22 21:17:54,461 - RR.Database - ERROR - Could not update student 350 110199 2018-09-22 21:15:59.236749
-2018-09-22 21:17:54,462 - RR - INFO - 9 Floor Nauwelaers 6C
-2018-09-22 21:18:23,216 - RR.Database - INFO - Update student 350 143967 2018-09-22 21:15:59.236749
-2018-09-22 21:18:23,217 - RR - INFO - 10 Floor Nauwelaers 6C
-2018-09-22 21:18:24,509 - RR.Database - INFO - Update student 350 145255 2018-09-22 21:15:59.236749
-2018-09-22 21:18:24,509 - RR - INFO - 11 Floor Nauwelaers 6C
-2018-09-22 21:18:27,503 - RR.Database - INFO - Update student 518 148255 2018-09-22 21:15:59.236749
-2018-09-22 21:18:27,503 - RR - INFO - 12 Xavier Roex 5AIT
-2018-09-22 21:18:28,367 - RR.Database - INFO - Update student 737 149095 2018-09-22 21:15:59.236749
-2018-09-22 21:18:28,367 - RR - INFO - 13 Yentl Kets 7RM
-2018-09-22 21:18:28,780 - RR.Database - INFO - Update student 287 149535 2018-09-22 21:15:59.236749
-2018-09-22 21:18:28,780 - RR - INFO - 14 Jorben Sieckelinck 5C
-2018-09-22 21:18:29,189 - RR.Database - INFO - Update student 683 149943 2018-09-22 21:15:59.236749
-2018-09-22 21:18:29,190 - RR - INFO - 15 Jessy Weyns 6ORa
-2018-09-22 21:18:29,613 - RR.Database - INFO - Update student 381 150367 2018-09-22 21:15:59.236749
-2018-09-22 21:18:29,614 - RR - INFO - 16 Lynn Schoeters 3OC
-2018-09-22 21:18:30,021 - RR.Database - INFO - Update student 493 150775 2018-09-22 21:15:59.236749
-2018-09-22 21:18:30,022 - RR - INFO - 17 Tom Heesen 4OITb
-2018-09-22 21:18:30,446 - RR.Database - INFO - Update student 214 151200 2018-09-22 21:15:59.236749
-2018-09-22 21:18:30,446 - RR - INFO - 18 Hanne Vervoort 4D
-2018-09-22 21:18:30,958 - RR.Database - INFO - Update student 387 151711 2018-09-22 21:15:59.236749
-2018-09-22 21:18:30,958 - RR - INFO - 19 Yelena Fernandez Moreno 3OITa
-2018-09-22 21:18:31,436 - RR.Database - INFO - Update student 258 152184 2018-09-22 21:15:59.236749
-2018-09-22 21:18:31,436 - RR - INFO - 20 Lukas Huyssen 5B
-2018-09-22 21:18:31,781 - RR.Database - INFO - Update student 131 152535 2018-09-22 21:15:59.236749
-2018-09-22 21:18:31,782 - RR - INFO - 21 Elza Chamieva 4A
-2018-09-22 21:18:32,062 - RR.Database - INFO - Update student 693 152816 2018-09-22 21:15:59.236749
-2018-09-22 21:18:32,062 - RR - INFO - 22 Rani Deboodt 6R
-2018-09-22 21:18:32,302 - RR.Database - INFO - Update student 420 153056 2018-09-22 21:15:59.236749
-2018-09-22 21:18:32,302 - RR - INFO - 23 Imane Elahmadi 3OITc
-2018-09-22 21:18:32,515 - RR.Database - INFO - Update student 27 153264 2018-09-22 21:15:59.236749
-2018-09-22 21:18:32,515 - RR - INFO - 24 Dimitri Weckx 3A
-2018-09-22 21:18:32,733 - RR.Database - INFO - Update student 165 153487 2018-09-22 21:15:59.236749
-2018-09-22 21:18:32,733 - RR - INFO - 25 Rakhman Pidiev 4B
-2018-09-22 21:18:32,948 - RR.Database - INFO - Update student 3 153704 2018-09-22 21:15:59.236749
-2018-09-22 21:18:32,948 - RR - INFO - 26 Mame-Diarra Cisse 3A
-2018-09-22 21:18:33,197 - RR.Database - INFO - Update student 263 153952 2018-09-22 21:15:59.236749
-2018-09-22 21:18:33,198 - RR - INFO - 27 Lyse Ooms 5B
-2018-09-22 21:18:33,438 - RR.Database - INFO - Update student 695 154193 2018-09-22 21:15:59.236749
-2018-09-22 21:18:33,438 - RR - INFO - 28 Sam Dirckx 6R
-2018-09-22 21:18:33,681 - RR.Database - INFO - Update student 183 154432 2018-09-22 21:15:59.236749
-2018-09-22 21:18:33,681 - RR - INFO - 29 Evelien Merckx 4C
-2018-09-22 21:18:33,918 - RR.Database - INFO - Update student 464 154671 2018-09-22 21:15:59.236749
-2018-09-22 21:18:33,919 - RR - INFO - 30 Imane El Morabit 4OC
-2018-09-22 21:18:34,172 - RR.Database - INFO - Update student 661 154920 2018-09-22 21:15:59.236749
-2018-09-22 21:18:34,173 - RR - INFO - 31 Zeno De Wit 6OL
-2018-09-22 21:18:34,421 - RR.Database - INFO - Update student 83 155176 2018-09-22 21:15:59.236749
-2018-09-22 21:18:34,422 - RR - INFO - 32 Emma Crynen 3D
-2018-09-22 21:18:34,662 - RR.Database - INFO - Update student 136 155415 2018-09-22 21:15:59.236749
-2018-09-22 21:18:34,662 - RR - INFO - 33 Kato Jacobs 4A
-2018-09-22 21:18:34,890 - RR.Database - INFO - Update student 226 155639 2018-09-22 21:15:59.236749
-2018-09-22 21:18:34,890 - RR - INFO - 34 Jordan Ngeriyabeza 4E
-2018-09-22 21:18:35,134 - RR.Database - INFO - Update student 644 155887 2018-09-22 21:15:59.236749
-2018-09-22 21:18:35,134 - RR - INFO - 35 Robin Crauwels 6MO
-2018-09-22 21:18:35,365 - RR.Database - INFO - Update student 278 156120 2018-09-22 21:15:59.236749
-2018-09-22 21:18:35,366 - RR - INFO - 36 Tibo Felix 5C
+2018-09-23 09:36:22,210 - RR - INFO - start FGR
+2018-09-23 09:36:22,215 - RR.Database - INFO - Creating table students: 
+2018-09-23 09:36:28,238 - RR.Database - INFO - Update student 6 1200 2018-09-23 09:36:27.025532
+2018-09-23 09:36:28,238 - RR - INFO - 1 Khava Dzhaykhanova 3A
+2018-09-23 09:36:28,570 - RR.Database - INFO - Update student 6 1536 2018-09-23 09:36:27.025532
+2018-09-23 09:36:28,570 - RR - INFO - 2 Khava Dzhaykhanova 3A
+2018-09-23 09:36:28,891 - RR.Database - INFO - Update student 13 1855 2018-09-23 09:36:27.025532
+2018-09-23 09:36:28,891 - RR - INFO - 3 Jonas Nelen 3A
+2018-09-23 09:36:29,307 - RR.Database - INFO - Update student 11 2271 2018-09-23 09:36:27.025532
+2018-09-23 09:36:29,307 - RR - INFO - 4 Boris Krastev 3A
+2018-09-23 09:36:29,643 - RR.Database - INFO - Update student 8 2607 2018-09-23 09:36:27.025532
+2018-09-23 09:36:29,643 - RR - INFO - 5 Kobe Geerts 3A
+2018-09-23 09:36:30,003 - RR.Database - INFO - Update student 17 2968 2018-09-23 09:36:27.025532
+2018-09-23 09:36:30,003 - RR - INFO - 6 Amelie Peeters 3A
+2018-09-23 09:36:30,419 - RR.Database - INFO - Update student 14 3384 2018-09-23 09:36:27.025532
+2018-09-23 09:36:30,419 - RR - INFO - 7 Ruth Nies 3A
+2018-09-23 09:36:30,874 - RR.Database - INFO - Update student 10 3839 2018-09-23 09:36:27.025532
+2018-09-23 09:36:30,875 - RR - INFO - 8 Lena Janssens 3A
+2018-09-23 09:36:31,555 - RR.Database - INFO - Update student 5 4520 2018-09-23 09:36:27.025532
+2018-09-23 09:36:31,555 - RR - INFO - 9 Kaat De Swert 3A
+2018-09-23 09:36:36,198 - RR.Register - INFO - Clear all timings
+2018-09-23 09:36:36,215 - RR.Database - INFO - Update student 1 None None
+2018-09-23 09:36:36,227 - RR.Database - INFO - Update student 2 None None
+2018-09-23 09:36:36,235 - RR.Database - INFO - Update student 3 None None
+2018-09-23 09:36:36,243 - RR.Database - INFO - Update student 4 None None
+2018-09-23 09:36:36,255 - RR.Database - INFO - Update student 5 None None
+2018-09-23 09:36:36,267 - RR.Database - INFO - Update student 6 None None
+2018-09-23 09:36:36,276 - RR.Database - INFO - Update student 7 None None
+2018-09-23 09:36:36,284 - RR.Database - INFO - Update student 8 None None
+2018-09-23 09:36:36,293 - RR.Database - INFO - Update student 9 None None
+2018-09-23 09:36:36,303 - RR.Database - INFO - Update student 10 None None
+2018-09-23 09:36:36,312 - RR.Database - INFO - Update student 11 None None
+2018-09-23 09:36:36,321 - RR.Database - INFO - Update student 12 None None
+2018-09-23 09:36:36,339 - RR.Database - INFO - Update student 13 None None
+2018-09-23 09:36:36,350 - RR.Database - INFO - Update student 14 None None
+2018-09-23 09:36:36,358 - RR.Database - INFO - Update student 15 None None
+2018-09-23 09:36:36,367 - RR.Database - INFO - Update student 16 None None
+2018-09-23 09:36:36,378 - RR.Database - INFO - Update student 17 None None
+2018-09-23 09:36:36,391 - RR.Database - INFO - Update student 18 None None
+2018-09-23 09:36:44,507 - RR.Database - INFO - Update student 5 17472 2018-09-23 09:36:27.025532
+2018-09-23 09:36:44,508 - RR - INFO - 10 Kaat De Swert 3A
+2018-09-23 09:36:44,873 - RR.Database - INFO - Update student 12 17833 2018-09-23 09:36:27.025532
+2018-09-23 09:36:44,874 - RR - INFO - 11 Estina Mayemba 3A
+2018-09-23 09:36:45,186 - RR.Database - INFO - Update student 1 18152 2018-09-23 09:36:27.025532
+2018-09-23 09:36:45,186 - RR - INFO - 11 Amélie Amer 3A
+2018-09-23 09:36:45,503 - RR.Database - INFO - Update student 15 18465 2018-09-23 09:36:27.025532
+2018-09-23 09:36:45,503 - RR - INFO - 11 Senne Nys 3A
+2018-09-23 09:36:45,795 - RR.Database - INFO - Update student 3 18760 2018-09-23 09:36:27.025532
+2018-09-23 09:36:45,795 - RR - INFO - 11 Mame-Diarra Cisse 3A
+2018-09-23 09:36:46,506 - RR.Database - INFO - Update student 7 19471 2018-09-23 09:36:27.025532
+2018-09-23 09:36:46,506 - RR - INFO - 11 Robbe Felix 3A
+2018-09-23 09:36:47,122 - RR.Database - INFO - Update student 17 20087 2018-09-23 09:36:27.025532
+2018-09-23 09:36:47,123 - RR - INFO - 11 Amelie Peeters 3A
+2018-09-23 09:36:54,392 - RR.Register - INFO - Import CSV, loaded 18 students
+2018-09-23 09:36:54,392 - RR.Database - ERROR - Could not add to database : Amer Amélie from 3A
+2018-09-23 09:36:54,392 - RR.Database - ERROR - Could not add to database : Cabes Jade from 3A
+2018-09-23 09:36:54,392 - RR.Database - ERROR - Could not add to database : Cisse Mame-Diarra from 3A
+2018-09-23 09:36:54,392 - RR.Database - ERROR - Could not add to database : Daems Lieke from 3A
+2018-09-23 09:36:54,392 - RR.Database - ERROR - Could not add to database : De Swert Kaat from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Dzhaykhanova Khava from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Felix Robbe from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Geerts Kobe from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Geylen Elena from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Janssens Lena from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Krastev Boris from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Mayemba Estina from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Nelen Jonas from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Nies Ruth from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Nys Senne from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Oorts Sten from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Peeters Amelie from 3A
+2018-09-23 09:36:54,393 - RR.Database - ERROR - Could not add to database : Pinxteren Jutta from 3A
+2018-09-23 09:36:54,394 - RR.Database - INFO - Added students to database
+2018-09-23 09:37:19,779 - RR.Database - INFO - Update student 7 1615 2018-09-23 09:37:18.146067
+2018-09-23 09:37:19,780 - RR - INFO - 1 Robbe Felix 3A
+2018-09-23 09:37:20,152 - RR.Database - INFO - Update student 12 1991 2018-09-23 09:37:18.146067
+2018-09-23 09:37:20,152 - RR - INFO - 2 Estina Mayemba 3A
+2018-09-23 09:37:20,545 - RR.Database - INFO - Update student 12 2383 2018-09-23 09:37:18.146067
+2018-09-23 09:37:20,545 - RR - INFO - 3 Estina Mayemba 3A
+2018-09-23 09:37:20,924 - RR.Database - INFO - Update student 4 2768 2018-09-23 09:37:18.146067
+2018-09-23 09:37:20,924 - RR - INFO - 4 Lieke Daems 3A
+2018-09-23 09:37:21,356 - RR.Database - INFO - Update student 12 3199 2018-09-23 09:37:18.146067
+2018-09-23 09:37:21,356 - RR - INFO - 5 Estina Mayemba 3A
+2018-09-23 09:37:21,768 - RR.Database - INFO - Update student 5 3608 2018-09-23 09:37:18.146067
+2018-09-23 09:37:21,769 - RR - INFO - 6 Kaat De Swert 3A
+2018-09-23 09:37:22,187 - RR.Database - INFO - Update student 5 4031 2018-09-23 09:37:18.146067
+2018-09-23 09:37:22,187 - RR - INFO - 7 Kaat De Swert 3A
+2018-09-23 09:37:22,593 - RR.Database - INFO - Update student 9 4439 2018-09-23 09:37:18.146067
+2018-09-23 09:37:22,594 - RR - INFO - 8 Elena Geylen 3A
+2018-09-23 09:37:22,979 - RR.Database - INFO - Update student 15 4823 2018-09-23 09:37:18.146067
+2018-09-23 09:37:22,979 - RR - INFO - 9 Senne Nys 3A
+2018-09-23 09:37:23,329 - RR.Database - INFO - Update student 2 5175 2018-09-23 09:37:18.146067
+2018-09-23 09:37:23,329 - RR - INFO - 10 Jade Cabes 3A
+2018-09-23 09:37:23,770 - RR.Database - INFO - Update student 1 5615 2018-09-23 09:37:18.146067
+2018-09-23 09:37:23,770 - RR - INFO - 11 Amélie Amer 3A
+2018-09-23 09:37:24,114 - RR.Database - INFO - Update student 14 5959 2018-09-23 09:37:18.146067
+2018-09-23 09:37:24,115 - RR - INFO - 12 Ruth Nies 3A
+2018-09-23 09:37:30,135 - RR.Register - INFO - Clear all timings
+2018-09-23 09:37:30,145 - RR.Database - INFO - Update student 1 None None
+2018-09-23 09:37:30,162 - RR.Database - INFO - Update student 2 None None
+2018-09-23 09:37:30,175 - RR.Database - INFO - Update student 3 None None
+2018-09-23 09:37:30,187 - RR.Database - INFO - Update student 4 None None
+2018-09-23 09:37:30,196 - RR.Database - INFO - Update student 5 None None
+2018-09-23 09:37:30,205 - RR.Database - INFO - Update student 6 None None
+2018-09-23 09:37:30,215 - RR.Database - INFO - Update student 7 None None
+2018-09-23 09:37:30,224 - RR.Database - INFO - Update student 8 None None
+2018-09-23 09:37:30,233 - RR.Database - INFO - Update student 9 None None
+2018-09-23 09:37:30,244 - RR.Database - INFO - Update student 10 None None
+2018-09-23 09:37:30,252 - RR.Database - INFO - Update student 11 None None
+2018-09-23 09:37:30,261 - RR.Database - INFO - Update student 12 None None
+2018-09-23 09:37:30,271 - RR.Database - INFO - Update student 13 None None
+2018-09-23 09:37:30,284 - RR.Database - INFO - Update student 14 None None
+2018-09-23 09:37:30,293 - RR.Database - INFO - Update student 15 None None
+2018-09-23 09:37:30,305 - RR.Database - INFO - Update student 16 None None
+2018-09-23 09:37:30,317 - RR.Database - INFO - Update student 17 None None
+2018-09-23 09:37:30,331 - RR.Database - INFO - Update student 18 None None

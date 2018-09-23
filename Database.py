@@ -77,13 +77,6 @@ class RR_DB :
         self.log.info('Added students to database')
         return rslt
 
-
-
-    # def find_(self, id):
-    #     self.csr.execute('SELECT * FROM guests WHERE id=?', (id,))
-    #     r = self.csr.fetchone()
-    #     return Guest(r)
-    #
     def find_student_from_badge(self, badgecode):
         badgecode = badgecode.upper()
         self.csr.execute('SELECT * FROM students WHERE badgecode=?', (badgecode,))

@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox
 import time, os
 from datetime import datetime, date, timedelta
 from Database import RR_DB
@@ -7,15 +6,13 @@ from Menu import Menu
 import locale, random
 import logging, logging.handlers
 
+
 VERSION = 'V1.0'
 
 LOG_FILENAME = 'log/rr-log.txt'
 LOG_HANDLE = 'RR'
 
 class RegisterRunner:
-
-
-
     def __init__(self, root=None, log=None):
 
         self.log = log
@@ -26,13 +23,12 @@ class RegisterRunner:
         #initialize database
         self.database = RR_DB(LOG_HANDLE)
 
-        self.student_id_list = self.database.get_students_id()
-        self.student_id_list_length = len(self.student_id_list)
+        self.get_students_id()
         random.seed()
 
         #initialize register
         #self.register = Register(root, self.database, LOG_HANDLE)
-        self.menu = Menu(root, self.database, LOG_HANDLE)
+        self.menu = Menu(self, root, self.database, LOG_HANDLE)
 
         #initialize GUI
         self.root=root
@@ -92,8 +88,12 @@ class RegisterRunner:
             self.time_lbl.configure(text='{:02d}:{:02d}'.format(m, s))
         root.after(1000, self.update_time)
 
-    def clear_database(self):
-        answer = tk.Message
+    def clear_display(self):
+        self.time_lbl.configure(text='00:00')
+        self.list_lbx.delete(0, 'end')
+
+    def get_students_id(self):
+        self.student_id_list = self.database.get_students_id()
 
     #state == true : clock is running
     def actions_on_state(self):
@@ -102,8 +102,7 @@ class RegisterRunner:
             self.starttime = datetime.now()
             #print("S " + str(self.starttime))
             self.start_stop_btn.config(bg='red', text='Stop')
-            self.time_lbl.configure(text='00:00')
-            self.list_lbx.delete(0, 'end')
+            self.clear_display()
             self.update_time()
         else:
             self.start_stop_btn.config(bg='green', text='Start')
@@ -119,6 +118,10 @@ class RegisterRunner:
         self.main_mnu.add_cascade(label="Menu", menu=self.menu_mnu)
         self.menu_mnu.add_command(label="Import", command=self.menu.import_students)
         self.menu_mnu.add_command(label="Export", command=self.menu.export_results)
+        self.menu_mnu.add_separator()
+        self.menu_mnu.add_command(label="Wis tijden", command=self.menu.clear_timings)
+        self.menu_mnu.add_command(label="Wis database", command=self.menu.clear_database)
+
         self.root.configure(menu=self.main_mnu)
 
     def init_widgets(self):
