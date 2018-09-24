@@ -19,8 +19,10 @@ class RegisterRunner:
         self.LIST_LBX_FORMAT = '{0:<6}{1:<69}{2:<10}{3:<15}'
         self.LIST_LBX_HEIGHT = 20
         self.running_state = False
-        self.switch_a_q = False
+        self.switch_q_a = True
         self.actions_on_q_a_state()
+        self.rfid_reader_M301 = False
+        self.actions_on_M301_present()
 
         #initialize database
         self.database = RR_DB(LOG_HANDLE)
@@ -58,13 +60,16 @@ class RegisterRunner:
                     if nbr < 100000:
                         student = self.database.find_student_from_number(nbr)
                     else:
+                        #If the M301 reader is used then the rfid code must be translated to hex and byteswapped
+                        if self.rfid_reader_M301:
+                            h = '{:0>8}'.format(hex(nbr).split('x')[-1].upper())
+                            badgecode = h[6:8] + h[4:6] + h[2:4] + h[0:2]
                         student = self.database.find_student_from_badge(badgecode)
                 except:
-                    #an RFID code is scanned, with potentianaly a Q or A in it.  Check if Q and A needs to be switched
-                    if self.switch_a_q:
-                        badgecode = badgecode.replace('Q', '!')
-                        badgecode = badgecode.replace('A', 'Q')
-                        badgecode = badgecode.replace('!', 'A')
+                    #an RFID code is scanned, with potentianaly a Q in it.  The Q needs to be changed to an A
+                    if self.switch_q_a:
+                        badgecode = badgecode.replace('Q', 'A')
+
                     student = self.database.find_student_from_badge(badgecode)
             if student.found:
                 d = datetime.now() - self.starttime
@@ -87,14 +92,24 @@ class RegisterRunner:
         self.badge_ent.delete(0, tk.END)
 
     def actions_on_q_a_state(self):
-        if self.switch_a_q:
-            self.switch_menu_label = 'WEL A en Q wisselen'
+        if self.switch_q_a:
+            self.switch_q_a_menu_label = 'WEL Q naar A veranderen'
         else:
-            self.switch_menu_label = 'NIET A en Q wisselen'
+            self.switch_q_a_menu_label = 'NIET Q naar A veranderen'
 
     def switch_a_q_state(self):
-        self.switch_a_q = not self.switch_a_q
+        self.switch_q_a = not self.switch_q_a
         self.actions_on_q_a_state()
+
+    def actions_on_M301_present(self):
+        if self.rfid_reader_M301:
+            self.M301_present_menu_label = 'M301 WORDT gebruikt'
+        else:
+            self.M301_present_menu_label = 'M301 wordt NIET gebruikt'
+
+    def switch_M301_present_state(self):
+        self.rfid_reader_M301 = not self.rfid_reader_M301
+        self.actions_on_M301_present()
 
 
     def update_time(self):
@@ -131,7 +146,8 @@ class RegisterRunner:
         self.actions_on_running_state()
 
     def update_menu(self):
-        self.menu_mnu.entryconfig(7, label=self.switch_menu_label)
+        self.menu_mnu.entryconfig(7, label=self.switch_q_a_menu_label)
+        self.menu_mnu.entryconfig(8, label=self.M301_present_menu_label)
 
     def init_menu(self):
         #menu
@@ -144,7 +160,8 @@ class RegisterRunner:
         self.menu_mnu.add_command(label="Wis tijden", command=self.menu.clear_timings)
         self.menu_mnu.add_command(label="Wis database", command=self.menu.clear_database)
         self.menu_mnu.add_separator()
-        self.menu_mnu.add_command(label=self.switch_menu_label, command=self.switch_a_q_state)
+        self.menu_mnu.add_command(label=self.switch_q_a_menu_label, command=self.switch_a_q_state)
+        self.menu_mnu.add_command(label=self.M301_present_menu_label, command=self.switch_M301_present_state)
 
         self.root.configure(menu=self.main_mnu)
 
